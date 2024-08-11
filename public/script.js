@@ -1,65 +1,77 @@
-document.getElementById('hanjaForm').addEventListener('submit', async function(event) {
-    event.preventDefault();
-    const hanjaInput = document.getElementById('hanjaInput').value;
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('hanjaForm');
+    const resultSection = document.getElementById('resultSection');
+    const resultTableBody = document.querySelector('#resultTable tbody');
+    const copyButton = document.getElementById('copyButton');
+    const downloadButton = document.getElementById('downloadButton');
 
-    const response = await fetch('/process', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ hanja: hanjaInput })
+    form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const hanjaInput = document.getElementById('hanjaInput').value.trim();
+        if (!hanjaInput) {
+            alert('한자를 입력해 주세요.');
+            return;
+        }
+
+        try {
+            const response = await fetch('/process', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ hanja: hanjaInput })
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok.');
+            }
+
+            const data = await response.json();
+
+            // Clear previous results
+            resultTableBody.innerHTML = '';
+
+            // Populate table with new results
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${item.hanja}</td>
+                    <td>${item.meaning}</td>
+                `;
+                resultTableBody.appendChild(row);
+            });
+
+            // Show the result section
+            resultSection.classList.remove('hidden');
+        } catch (error) {
+            console.error('Fetch error:', error);
+        }
     });
 
-    const data = await response.json();
-    const resultTable = document.getElementById('resultTable');
-    const resultBody = resultTable.querySelector('tbody');
-    
-    // 테이블과 버튼을 표시
-    resultTable.style.display = 'table';
-    document.getElementById('copyButton').style.display = 'inline';
-    document.getElementById('downloadButton').style.display = 'inline';
-
-    // 테이블의 tbody를 초기화
-    resultBody.innerHTML = '';
-
-    // 검색 결과를 테이블에 추가
-    data.forEach(item => {
-        let row = resultBody.insertRow();
-        let cellHanja = row.insertCell(0);
-        let cellMeaning = row.insertCell(1);
-        cellHanja.textContent = item.hanja;
-        cellMeaning.textContent = item.meaning;
+    copyButton.addEventListener('click', () => {
+        const rows = Array.from(resultTableBody.querySelectorAll('tr')).map(row => {
+            const cells = Array.from(row.querySelectorAll('td')).map(cell => cell.textContent).join('\t');
+            return cells;
+        }).join('\n');
+        
+        navigator.clipboard.writeText(rows).then(() => {
+            alert('내용이 클립보드에 복사되었습니다.');
+        });
     });
-});
 
-document.getElementById('copyButton').addEventListener('click', function() {
-    const resultTable = document.getElementById('resultTable').querySelector('tbody');
-    let textToCopy = '';
-
-    for (let row of resultTable.rows) {
-        textToCopy += `${row.cells[0].textContent}\t${row.cells[1].textContent}\n`;
-    }
-
-    navigator.clipboard.writeText(textToCopy).then(() => {
-        alert('복사되었습니다!');
-    }).catch(err => {
-        console.error('복사 실패:', err);
+    downloadButton.addEventListener('click', () => {
+        const rows = Array.from(resultTableBody.querySelectorAll('tr')).map(row => {
+            const cells = Array.from(row.querySelectorAll('td')).map(cell => cell.textContent).join('\t');
+            return cells;
+        }).join('\n');
+        
+        const blob = new Blob([rows], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'results.txt';
+        a.click();
+        URL.revokeObjectURL(url);
     });
-});
-
-document.getElementById('downloadButton').addEventListener('click', function() {
-    const resultTable = document.getElementById('resultTable').querySelector('tbody');
-    let textToDownload = '';
-
-    for (let row of resultTable.rows) {
-        textToDownload += `${row.cells[0].textContent}\t${row.cells[1].textContent}\n`;
-    }
-
-    const blob = new Blob([textToDownload], { type: 'text/plain' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'hanja_result.txt';
-    a.click();
-    URL.revokeObjectURL(url);
 });
