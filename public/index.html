@@ -4,28 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>한자 검색</title>
-    <link rel="stylesheet" href="style.css">
+    <link href="styles/main.css" rel="stylesheet">
 </head>
-<body>
-    <h1>한자 검색</h1>
-    <form id="hanjaForm">
-        <label for="hanjaInput">한자 입력:</label>
-        <input type="text" id="hanjaInput" name="hanja">
-        <button type="submit">검색</button>
-    </form>
-    <br>
-    <table id="resultTable" style="display: none;">
-        <thead>
-            <tr>
-                <th>한자</th>
-                <th>뜻</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
-    <br>
-    <button id="copyButton" style="display: none;">복사</button>
-    <button id="downloadButton" style="display: none;">파일로 저장</button>
+<body class="bg-gray-100 text-gray-900">
+    <div class="container mx-auto p-6">
+        <h1 class="text-3xl font-bold mb-4">한자 검색</h1>
+        <form id="hanjaForm" class="mb-6">
+            <label for="hanjaInput" class="block text-lg font-medium mb-2">한자 입력:</label>
+            <input type="text" id="hanjaInput" name="hanja" class="border border-gray-300 rounded px-4 py-2 w-full" placeholder="한자를 입력하세요">
+            <button type="submit" class="mt-4 bg-blue-500 text-white rounded px-4 py-2 hover:bg-blue-600">검색</button>
+        </form>
+        <table id="resultTable" class="hidden w-full bg-white shadow-md rounded">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="px-4 py-2 border">한자</th>
+                    <th class="px-4 py-2 border">뜻</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+        <div class="mt-4">
+            <button id="copyButton" class="hidden bg-green-500 text-white rounded px-4 py-2 hover:bg-green-600">복사</button>
+            <button id="downloadButton" class="hidden bg-gray-500 text-white rounded px-4 py-2 hover:bg-gray-600">파일로 저장</button>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 </body>
