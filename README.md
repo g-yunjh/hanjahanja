@@ -19,7 +19,7 @@
 1. **리포지토리 클론:**
 
 ``` bash
-git clone https://github.com/your-username/hanjahanja.git  
+git clone https://github.com/g-yunjh/hanjahanja.git  
 cd hanjahanja
 ```
   
