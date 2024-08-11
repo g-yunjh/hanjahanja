@@ -12,34 +12,63 @@ body {
     padding: 20px;
 }
 
-h1 {
-    font-size: 2rem;
-    color: #333;
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f0f0f0; 
+}
+
+.logo-text {
+    font-family: 'Sacramento', cursive;
+    font-size: 2.5rem; 
+    color: #6A1B9A; 
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); 
+    letter-spacing: 1px; 
+}
+
+header {
+    background-color: #ffffff;
+    border-bottom: 2px solid #dcdcdc;
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #333;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    resize: vertical; 
+    min-height: 150px; 
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap:5px;
 }
 
 button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
+    background-color: #6A1B9A; 
+    color: white; 
+    border: none; 
+    border-radius: 4px; 
     padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 4px;
+    font-size: 16px; 
+    cursor: pointer; 
+    transition: background-color 0.3s; 
 }
 
 button:hover {
-    background-color: #0056b3;
-}
-
-input[type="text"] {
-    width: 100%;
-    padding: 10px;
-    font-size: 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    background-color: #4A0072;
 }
 
 section {
+    margin-bottom: 20px;
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
@@ -53,7 +82,7 @@ table {
 
 th, td {
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #888;
     text-align: left;
 }
 
@@ -63,4 +92,15 @@ th {
 
 .hidden {
     display: none;
+}
+
+.hanja-col {
+    font-size: 1.25rem; 
+    font-weight: bold;
+    text-align: center;
+}
+
+.material-symbols-outlined {
+    vertical-align: middle;
+    font-size: 1.5rem;
 }

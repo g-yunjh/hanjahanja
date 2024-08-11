@@ -1,9 +1,15 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const favicon = require('serve-favicon');
 
 const app = express();
 const port = 3000;
+
+// 정적 파일 서빙 설정
+app.use(express.static(path.join(__dirname, 'public')));
+// 파비콘 미들웨어 설정
+app.use(favicon(path.join(__dirname, 'public/icons/favicon.ico')));
 
 // JSON 파일에서 데이터 로드
 const jsonDataPath = path.join(__dirname, 'hanja_data.json');

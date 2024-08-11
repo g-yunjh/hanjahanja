@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
             data.forEach(item => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td>${item.hanja}</td>
+                    <td class = "hanja-col">${item.hanja}</td>
                     <td>${item.meaning}</td>
                 `;
                 resultTableBody.appendChild(row);
