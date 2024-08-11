@@ -10,7 +10,9 @@
 - 사용법
 
 ## 실행화면
-![image](https://github.com/user-attachments/assets/05583947-3076-4ffb-89a7-7600881f3748)
+<p align="center>
+  <img src="![HanjaHanja-Brave2024-08-1122-34-42-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/d2eb985b-df07-4ddd-bf98-4f064f76ca8c)">
+</p>
 
 ## 설치
 
