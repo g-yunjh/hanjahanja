@@ -21,7 +21,7 @@ body {
 }
 
 .logo-text {
-    font-family: 'Sacramento', cursive;
+    font-family: 'Poppins', cursive;
     font-size: 2.5rem; 
     color: #6A1B9A; 
     font-weight: bold;
@@ -103,4 +103,10 @@ th {
 .material-symbols-outlined {
     vertical-align: middle;
     font-size: 1.5rem;
+}
+
+.info-message {
+    font-size: 0.875rem;
+    color: #666;
+    text-align: center; 
 }

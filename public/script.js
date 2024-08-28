@@ -4,11 +4,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const resultTableBody = document.querySelector('#resultTable tbody');
     const copyButton = document.getElementById('copyButton');
     const downloadButton = document.getElementById('downloadButton');
+    const MAX_LENGTH = 10000;
 
     form.addEventListener('submit', async (event) => {
         event.preventDefault();
 
         const hanjaInput = document.getElementById('hanjaInput').value.trim();
+
+        if (hanjaInput.length > MAX_LENGTH) {
+            alert(`입력한 한자가 너무 많습니다. 최대 ${MAX_LENGTH}자까지 입력할 수 있습니다.`);
+            return;
+        }
+
         if (!hanjaInput) {
             alert('한자를 입력해 주세요.');
             return;
@@ -36,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
             data.forEach(item => {
                 const row = document.createElement('tr');
                 row.innerHTML = `
-                    <td class = "hanja-col">${item.hanja}</td>
+                    <td class="hanja-col">${item.hanja}</td>
                     <td>${item.meaning}</td>
                 `;
                 resultTableBody.appendChild(row);
